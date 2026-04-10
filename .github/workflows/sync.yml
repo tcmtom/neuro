@@ -1,0 +1,23 @@
+name: 自动同步上游仓库
+
+on:
+  schedule:
+    # 定时触发：'0 0 * * *' 代表每天UTC时间0点（北京时间早上8点）运行
+    - cron: '0 0 * * *'
+  workflow_dispatch:  # 允许你手动在GitHub网页上触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false  # 对于私有仓库是必要的
+
+      - name: 同步上游仓库更新
+        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4.1
+        with:
+          target_sync_branch: main  # 你的目标分支（通常是main或master）
+          target_repo_token: ${{ secrets.GITHUB_TOKEN }}
+          upstream_sync_repo: <上游仓库作者>/<上游仓库名>  # 替换成原始仓库
+          upstream_sync_branch: main  # 上游仓库的主分支名
