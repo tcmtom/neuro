@@ -19,5 +19,5 @@ jobs:
         with:
           target_sync_branch: main  # 你的目标分支（通常是main或master）
           target_repo_token: ${{ secrets.GITHUB_TOKEN }}
-          upstream_sync_repo: <上游仓库作者>/<上游仓库名>  # 替换成原始仓库
+          upstream_sync_repo: OpenHUTB/neuro  # 替换成原始仓库
           upstream_sync_branch: main  # 上游仓库的主分支名
